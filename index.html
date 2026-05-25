@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pole Dancing & The History of Everything</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black: #0a0a0a;
+    --white: #f5f0e8;
+    --cream: #e8e0d0;
+    --accent: #c9463d;
+    --gold: #c9a84c;
+    --grey: #3a3a3a;
+    --mid: #1a1a1a;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--white);
+    font-family: 'DM Serif Display', serif;
+    overflow-x: hidden;
+    cursor: crosshair;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 4rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--black);
+  }
+
+  .hero-media {
+    position: absolute;
+    inset: 0;
+    background: #111;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-media video,
+  .hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.35;
+    filter: grayscale(30%);
+  }
+
+  .media-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px dashed #444;
+    color: #555;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+    gap: 1rem;
+  }
+
+  .media-placeholder .icon { font-size: 2.5rem; opacity: 0.4; }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.95) 0%, rgba(10,10,10,0.3) 60%, transparent 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.2s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(4rem, 12vw, 11rem);
+    line-height: 0.9;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.4s forwards;
+  }
+
+  .hero-title em {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  .hero-subtitle {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(1rem, 2vw, 1.4rem);
+    color: var(--cream);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.6s forwards;
+    margin-top: 1.5rem;
+    max-width: 500px;
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    right: 4rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: #555;
+    writing-mode: vertical-rl;
+    opacity: 0;
+    animation: fadeUp 1s 1s forwards;
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.5rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mix-blend-mode: difference;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.15em;
+    color: var(--white);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 3rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.2s;
+  }
+
+  .nav-links a:hover { opacity: 1; }
+
+  /* ─── SECTION BASE ─── */
+  .section {
+    min-height: 100vh;
+    padding: 8rem 4rem;
+    position: relative;
+  }
+
+  .section-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(8rem, 20vw, 18rem);
+    line-height: 1;
+    color: transparent;
+    -webkit-text-stroke: 1px #222;
+    position: absolute;
+    top: 3rem;
+    right: 3rem;
+    pointer-events: none;
+    user-select: none;
+  }
+
+  .section-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 2rem;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 7vw, 6rem);
+    line-height: 0.95;
+    margin-bottom: 3rem;
+    max-width: 700px;
+  }
+
+  .body-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.8;
+    color: var(--cream);
+    max-width: 620px;
+  }
+
+  .body-text p { margin-bottom: 1.5em; }
+
+  .body-text strong {
+    color: var(--white);
+    font-style: italic;
+  }
+
+  .body-text em {
+    color: var(--gold);
+  }
+
+  /* ─── SECTION 1 — UNIVERSE / PHYSICS ─── */
+  .s1 { background: var(--black); }
+
+  .s1-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+    margin-top: 2rem;
+  }
+
+  .force-block {
+    margin-top: 4rem;
+    padding: 2rem;
+    border-left: 1px solid #333;
+    position: relative;
+  }
+
+  .force-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.5rem;
+    color: var(--accent);
+    letter-spacing: 0.05em;
+    margin-bottom: 1rem;
+  }
+
+  .force-ratio {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    color: #555;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+
+  .counterfactual {
+    background: var(--mid);
+    padding: 1.5rem;
+    margin-top: 1.5rem;
+    border-top: 1px solid #333;
+  }
+
+  .counterfactual-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: #555;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .counterfactual p {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #888;
+    margin-bottom: 0.5rem;
+  }
+
+  .video-placeholder {
+    width: 100%;
+    aspect-ratio: 9/16;
+    background: var(--mid);
+    border: 1px dashed #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: #444;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .video-placeholder .icon { font-size: 2rem; opacity: 0.4; }
+
+  .video-caption {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    color: #444;
+    text-align: center;
+    margin-top: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .ratio-display {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    color: transparent;
+    -webkit-text-stroke: 1px var(--accent);
+    line-height: 1;
+    margin: 3rem 0 1rem;
+    opacity: 0.4;
+  }
+
+  /* ─── SECTION 2 — EVOLUTION ─── */
+  .s2 {
+    background: var(--mid);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 4rem 0;
+    max-width: 700px;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--accent), #333);
+  }
+
+  .timeline-item {
+    padding: 2rem 0 2rem 3rem;
+    position: relative;
+  }
+
+  .timeline-item::before {
+    content: '';
+    position: absolute;
+    left: -3px;
+    top: 2.4rem;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .timeline-age {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.6rem;
+    letter-spacing: 0.05em;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+  }
+
+  .timeline-text {
+    font-family: 'DM Serif Display', serif;
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: #888;
+  }
+
+  .s2-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .pullquote {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(1.3rem, 2.5vw, 1.8rem);
+    line-height: 1.5;
+    color: var(--white);
+    border-left: 3px solid var(--gold);
+    padding-left: 2rem;
+    margin: 3rem 0;
+  }
+
+  /* ─── SECTION 3 — HISTORY / ORIGINS ─── */
+  .s3 { background: var(--black); }
+
+  .s3-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    margin-top: 3rem;
+  }
+
+  .image-placeholder {
+    width: 100%;
+    aspect-ratio: 4/5;
+    background: var(--mid);
+    border: 1px dashed #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    color: #444;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .label-block {
+    margin: 3rem 0;
+    padding: 2rem;
+    background: var(--mid);
+    position: relative;
+  }
+
+  .label-block::before {
+    content: attr(data-label);
+    font-family: 'DM Mono', monospace;
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    color: var(--accent);
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  /* ─── SECTION 4 — ANTHROPOCENE ─── */
+  .s4 {
+    background: var(--mid);
+  }
+
+  .s4-layout {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    margin-top: 3rem;
+  }
+
+  .stat-block {
+    padding: 2rem 0;
+    border-top: 1px solid #333;
+  }
+
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 4rem;
+    color: var(--gold);
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    color: #666;
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+  }
+
+  /* ─── CLOSING ─── */
+  .closing {
+    min-height: 80vh;
+    background: var(--black);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .closing::before {
+    content: 'POLE';
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 30vw;
+    color: transparent;
+    -webkit-text-stroke: 1px #1a1a1a;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .closing-content {
+    position: relative;
+    z-index: 2;
+    max-width: 700px;
+  }
+
+  .closing-text {
+    font-family: 'DM Serif Display', serif;
+    font-style: italic;
+    font-size: clamp(1.2rem, 2.5vw, 1.8rem);
+    line-height: 1.7;
+    color: var(--cream);
+    margin-bottom: 3rem;
+  }
+
+  .closing-sig {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    color: #444;
+    text-transform: uppercase;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #333, transparent);
+    margin: 4rem 0;
+  }
+
+  /* ─── REFERENCES ─── */
+  .refs {
+    background: #0f0f0f;
+    padding: 4rem;
+    border-top: 1px solid #1f1f1f;
+  }
+
+  .refs-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.5rem;
+    letter-spacing: 0.1em;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+
+  .ref-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.7rem;
+    line-height: 1.8;
+    color: #444;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #1a1a1a;
+    letter-spacing: 0.02em;
+  }
+
+  .ref-item a { color: #555; text-decoration: none; }
+  .ref-item a:hover { color: var(--accent); }
+
+  /* ─── ANIMATIONS ─── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* ─── HORIZONTAL MARQUEE ─── */
+  .marquee-wrap {
+    overflow: hidden;
+    border-top: 1px solid #1f1f1f;
+    border-bottom: 1px solid #1f1f1f;
+    padding: 1rem 0;
+    margin: 5rem -4rem;
+  }
+
+  .marquee-track {
+    display: flex;
+    gap: 4rem;
+    animation: marquee 20s linear infinite;
+    white-space: nowrap;
+  }
+
+  .marquee-track span {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.2em;
+    color: #2a2a2a;
+    text-transform: uppercase;
+  }
+
+  .marquee-track span.accent { color: var(--accent); }
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* ─── RESPONSIVE ─── */
+  @media (max-width: 900px) {
+    nav { padding: 1.5rem 2rem; }
+    .nav-links { display: none; }
+    .section { padding: 6rem 2rem; }
+    .hero { padding: 2rem; }
+    .s1-layout, .s2-layout, .s3-layout, .s4-layout {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+    }
+    .section-num { font-size: 8rem; }
+    .refs { padding: 3rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">LBH</div>
+  <ul class="nav-links">
+    <li><a href="#universe">Universe</a></li>
+    <li><a href="#evolution">Evolution</a></li>
+    <li><a href="#history">Origins</a></li>
+    <li><a href="#anthropocene">Today</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-media">
+    <!-- REPLACE: add your best pole photo or video clip here -->
+    <div class="media-placeholder">
+      <div class="icon">▶</div>
+      <div>HERO VIDEO / PHOTO<br>Replace with your pole clip</div>
+    </div>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag">A Little Big History</div>
+    <h1 class="hero-title">Pole<br>Dancing<br>& The <em>Universe</em></h1>
+    <p class="hero-subtitle">From the Big Bang to a studio in Amsterdam — 13.8 billion years in the making.</p>
+  </div>
+  <div class="scroll-hint">Scroll to explore ↓</div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Gravity</span><span class="accent">✦</span>
+    <span>Electromagnetism</span><span class="accent">✦</span>
+    <span>Evolution</span><span class="accent">✦</span>
+    <span>Play</span><span class="accent">✦</span>
+    <span>Sex Work</span><span class="accent">✦</span>
+    <span>Gender</span><span class="accent">✦</span>
+    <span>The Anthropocene</span><span class="accent">✦</span>
+    <span>13.8 Billion Years</span><span class="accent">✦</span>
+    <span>Gravity</span><span class="accent">✦</span>
+    <span>Electromagnetism</span><span class="accent">✦</span>
+    <span>Evolution</span><span class="accent">✦</span>
+    <span>Play</span><span class="accent">✦</span>
+    <span>Sex Work</span><span class="accent">✦</span>
+    <span>Gender</span><span class="accent">✦</span>
+    <span>The Anthropocene</span><span class="accent">✦</span>
+    <span>13.8 Billion Years</span><span class="accent">✦</span>
+  </div>
+</div>
+
+<!-- SECTION 1: UNIVERSE -->
+<section class="section s1" id="universe">
+  <div class="section-num">01</div>
+  <div class="section-tag">Modules 2–3 · The Inanimate World</div>
+  <h2 class="section-title reveal">The Forces That Make It Possible</h2>
+
+  <div class="s1-layout">
+    <div>
+      <div class="body-text reveal">
+        <p>The physical conditions that make pole dancing possible are the endpoint of 13.8 billion years of cosmic history. The six fundamental constants acting on a dancer's body were fixed at the very beginning of the universe, and if any one were even slightly different, the cosmos would be unrecognisable.</p>
+        <p>Two of these are directly visible in every pole session. The ratio of electromagnetism to gravity alone is 10³⁶ — and it is precisely this relationship that makes pole dancing physically possible. Pole dancing could be viewed as a demonstration of these two forces beautifully landing in the Goldilocks zone.</p>
+      </div>
+
+      <div class="ratio-display reveal">10³⁶</div>
+      <p style="font-family:'DM Mono',monospace;font-size:0.6rem;letter-spacing:0.2em;color:#444;text-transform:uppercase;">Ratio of electromagnetism to gravity</p>
+
+      <!-- GRAVITY -->
+      <div class="force-block reveal">
+        <div class="force-ratio">Module 2 · Fundamental Constant</div>
+        <div class="force-name">Gravity</div>
+        <div class="body-text">
+          <p>Gives us weight and makes every hold and inversion a fight. Strong enough that bodyweight is meaningful resistance to work against — weak enough that a human body can overcome it temporarily.</p>
+        </div>
+        <div class="counterfactual">
+          <div class="counterfactual-label">If stronger →</div>
+          <p>Most moves become impossible. The bodyweight pulled down exceeds what human muscles can generate.</p>
+          <div class="counterfactual-label" style="margin-top:1rem;">If weaker →</div>
+          <p>The move loses its meaning. You'd float up with minimal effort. The entire logic of the sport dissolves.</p>
+        </div>
+      </div>
+
+      <!-- ELECTROMAGNETISM -->
+      <div class="force-block reveal">
+        <div class="force-ratio">Module 2 · Fundamental Constant</div>
+        <div class="force-name">Electrical Force</div>
+        <div class="body-text">
+          <p>The force behind friction — the grip between skin and pole is electromagnetic attraction between atoms at the surface of two materials. Almost everything tactile in pole dancing is electromagnetism.</p>
+        </div>
+        <div class="counterfactual">
+          <div class="counterfactual-label">If stronger →</div>
+          <p>The skin grip locks you to the pole. Releasing mid-move becomes dangerous. The jade and genie stiffen into immobility.</p>
+          <div class="counterfactual-label" style="margin-top:1rem;">If weaker →</div>
+          <p>The grip disappears entirely. Every contact point fails. You'd need mechanical grip for everything — a completely different sport.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <!-- VIDEO: CLIMB + AERIAL INVERT -->
+      <div class="video-placeholder reveal">
+        <div class="icon">▶</div>
+        <div>VIDEO: CLIMB + AERIAL INVERT<br><br>Replace with your gravity demonstration clip</div>
+      </div>
+      <div class="video-caption">Gravity — the climb and aerial invert</div>
+
+      <div style="margin-top: 4rem;">
+        <!-- VIDEO: JADE + GENIE -->
+        <div class="video-placeholder reveal">
+          <div class="icon">▶</div>
+          <div>VIDEO: JADE + GENIE<br><br>Replace with your electromagnetism demonstration clip</div>
+        </div>
+        <div class="video-caption">Electromagnetism — the jade and genie</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 2: EVOLUTION -->
+<section class="section s2" id="evolution">
+  <div class="section-num">02</div>
+  <div class="section-tag">Modules 4–6 · The History of Life</div>
+  <h2 class="section-title reveal">Why The Body Wants To Do This</h2>
+
+  <div class="s2-layout">
+    <div>
+      <div class="body-text reveal">
+        <p>The lens of evolution can be used not only to explain <strong>how</strong> we are able to do pole tricks, but also <strong>why</strong> we might even want to. It is all an accumulation of solutions to completely different problems over hundreds of millions of years.</p>
+      </div>
+
+      <div class="timeline reveal">
+        <div class="timeline-item">
+          <div class="timeline-age">~500 million years ago</div>
+          <div class="timeline-heading">Proprioception</div>
+          <div class="timeline-text">Directed movement and the sense of body position evolved in the earliest motile single-celled organisms — a sensor detecting food or danger, connected to a tail that moved toward or away from it. The absolute bedrock of every pole trick.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-age">~400 million years ago</div>
+          <div class="timeline-heading">Load-Bearing Limbs</div>
+          <div class="timeline-text">When vertebrates moved onto land, bodies had to hold their own weight against gravity for the first time. Bilateral body plan, spine, paired limbs — the architecture pole dancing still runs on.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-age">~200 million years ago</div>
+          <div class="timeline-heading">The Mammalian Brain</div>
+          <div class="timeline-text">A more sophisticated neuromuscular system, finer motor control. The brain evolved as an image-forming system where any change that improved survival was reinforced. The dopamine reward system is an extension of this — the brain learned to make useful behaviours feel good.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-age">~60 million years ago</div>
+          <div class="timeline-heading">Primates</div>
+          <div class="timeline-text">Tree-dwelling survival selected for exactly what pole dancing demands: grip, shoulder rotation, bearing bodyweight overhead, inverting, hanging. The pole dancer's body is a refined version of this, built by millions of years of selection pressure.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-age">Today</div>
+          <div class="timeline-heading">You, In A Studio</div>
+          <div class="timeline-text">Bipedalism made grip strength redundant for survival — but evolution doesn't reverse course. Path dependency locked the hardware in. The same circuits that once rewarded tree-climbing fire when you nail a trick. The brain doesn't know the context changed.</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="pullquote reveal">
+        "Play exists to make practicing survival skills feel rewarding. The enjoyment is not incidental — it is the mechanism."
+      </div>
+
+      <div class="body-text reveal">
+        <p>The Gaia parallel: just as life creates and maintains the conditions for its own survival through feedback loops, play reinforces the physical behaviours the organism needs to survive by making them feel good. Pole dancing activates a very old reward circuit doing exactly what it evolved to do — just in a context it never anticipated.</p>
+        <p>This is why pole dancing feels the way it does in a way that's genuinely hard to explain. It is one continuous line from the first single-celled organism that learned to move toward food, to the primate brain that learned to make climbing feel good, to a human choosing to spend an evening in a pole studio for the fun of it.</p>
+      </div>
+
+      <!-- VIDEO: PLAY / PERSONAL CLIP -->
+      <div class="video-placeholder reveal" style="margin-top:3rem;">
+        <div class="icon">▶</div>
+        <div>VIDEO: PERSONAL CLIP<br><br>Something that feels playful and instinctive — a favourite move, a flow sequence</div>
+      </div>
+      <div class="video-caption">Play — movement as reward</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 3: HISTORY / ORIGINS -->
+<section class="section s3" id="history">
+  <div class="section-num">03</div>
+  <div class="section-tag">Modules 9–10 · Human History</div>
+  <h2 class="section-title reveal">Where Pole Dancing Actually Came From</h2>
+
+  <div class="s3-layout">
+    <div>
+      <div class="body-text reveal">
+        <p>Pole-related traditions appeared independently across many cultures — the European Maypole, Indian Mallakhamb, Chinese pole acrobatics. While these are sometimes listed as the origins of the sport, there is no real evidence connecting any of these to modern pole dancing. Likely, they are brought up as an effort to distance it from its real roots.</p>
+      </div>
+
+      <div class="label-block reveal" data-label="The Real Origin">
+        <div class="body-text">
+          <p>The real origins are Middle-Eastern and Romani women performing in the travelling circus in the late 19th century USA. These women were not formally paid — they relied on tips from the crowd, which likely contributed to the show becoming more and more enticing. They used the pole in the centre of the tent for support while removing clothing, and to climb and spin around it.</p>
+        </div>
+      </div>
+
+      <div class="label-block reveal" data-label="The Racial Layer">
+        <div class="body-text">
+          <p>When these women of colour started integrating into burlesque — previously strictly whites-only — they were promoted as "exotics" with descriptors like "jungle fever" or "voodoo mistress." The term "exotic dancer" emerged to distance them from white performers portrayed as more high-class and sophisticated.</p>
+          <p>The hypersexualisation that became attached to pole dancing, and the erasure of who actually built it, both have roots here.</p>
+        </div>
+      </div>
+
+      <div class="label-block reveal" data-label="The Economics">
+        <div class="body-text">
+          <p>In agrarian societies, women were expected to focus their lives on bearing children, which tied them to the home. The shift to industrialisation did not change that. For women in most of recorded history, the body was one of the very few economic resources they had direct control over — which helps explain why entertainers was one of the first ever professions, recorded in the Uruk Standard Professions List.</p>
+          <p>By the 1980s, the specific vocabulary of modern pole dancing developed inside strip clubs — dancers innovating within constrained economic circumstances, building the techniques that are still the foundation of the sport today.</p>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <!-- HISTORICAL IMAGE PLACEHOLDER -->
+      <div class="image-placeholder reveal">
+        <div class="icon">🖼</div>
+        <div>HISTORICAL IMAGE<br><br>e.g. Hoochie Coochie era photograph, circus poster, or Uruk Standard Professions List tablet — check copyright before using</div>
+      </div>
+
+      <div class="pullquote reveal" style="margin-top:3rem;">
+        "Distancing pole dancing from sex work doesn't erase those origins — it just makes the women who created it invisible."
+      </div>
+
+      <!-- VIDEO: FEMININE MOVES -->
+      <div class="video-placeholder reveal" style="margin-top:3rem;aspect-ratio:9/16;">
+        <div class="icon">▶</div>
+        <div>VIDEO: STRONGLY FEMALE-BODY ORIENTED MOVES<br><br>Your personal interpretation of the history</div>
+      </div>
+      <div class="video-caption">Personal interpretation — the history in movement</div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTION 4: ANTHROPOCENE -->
+<section class="section s4" id="anthropocene">
+  <div class="section-num">04</div>
+  <div class="section-tag">Module 11–12 · The Anthropocene</div>
+  <h2 class="section-title reveal">A Sport On Our Own Terms</h2>
+
+  <div class="s4-layout">
+    <div>
+      <div class="body-text reveal">
+        <p>Although pole dancing is still often related to the context of erotic performance, it now also exists as a form of sport and a hobby that has nothing to do with it apart from its history. This new chapter can be traced back to specific historical changes during the Anthropocene.</p>
+        <p>As economies industrialised, child mortality dropped dramatically — families no longer needed to have many children to ensure some survived. Children shifted from being economic assets to economic costs. The rational response was to have fewer children and invest more in each one.</p>
+        <p>Fewer pregnancies meant more time, more energy, and eventually more economic independence. The commercial pole dancing industry as it exists today is part of the consumerist economy dependent on a growing global middle class with purchasing power — and especially women's entry into that class as independent earners.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:2rem;" class="reveal">
+        <div class="stat-block">
+          <div class="stat-num">1990s</div>
+          <div class="stat-label">Pole shifts to fitness</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">+70%</div>
+          <div class="stat-label">Male participation since 2017</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">95%</div>
+          <div class="stat-label">Women in pole sports, 2011</div>
+        </div>
+        <div class="stat-block">
+          <div class="stat-num">2017</div>
+          <div class="stat-label">Olympic observer status</div>
+        </div>
+      </div>
+
+      <div class="body-text reveal" style="margin-top:3rem;">
+        <p>The shift from pole dancing as erotic performance staged for a male audience to a sport practiced on our own terms was only possible due to the legal and social shifts around gender that accelerated through the twentieth century — access to education, reproductive rights, legal protections, and changing norms around work and public life.</p>
+        <p>The sport still remains political. There are ongoing debates about whether it belongs in the Olympics, whether it is empowering or exploitative, whether its erotic history should be celebrated or distanced from.</p>
+      </div>
+    </div>
+
+    <div>
+      <!-- VIDEO: CONTEMPORARY POLE -->
+      <div class="video-placeholder reveal">
+        <div class="icon">▶</div>
+        <div>VIDEO: CONTEMPORARY POLE<br><br>Your choreography sequence — pole as sport and art on your own terms</div>
+      </div>
+      <div class="video-caption">Pole dancing today</div>
+
+      <div class="pullquote reveal" style="margin-top:3rem;">
+        "I get to choose what pole dancing means for me — how sexual it is, who gets to see it and in what context."
+      </div>
+
+      <div class="body-text reveal" style="margin-top:2rem;">
+        <p>While I take that choice for granted in my everyday life, learning about its history and seeing all the discourse around pole dancing reminds me how remarkable this actually is — and how it is the result of changes that took a very long time to happen and that are still not complete.</p>
+        <p>Having said that, this is not why I started the hobby or what drives me to the studio every week. At the end of the day, this is simply a fun and enjoyable activity that my body and brain have evolved to love.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="closing">
+  <div class="closing-content">
+    <p class="closing-text">
+      "It is one continuous line — from the first single-celled organism that learned to move toward food, to the primate brain that learned to make climbing feel good, to a human choosing to spend an evening in a pole studio for the fun of it."
+    </p>
+    <div class="closing-sig">A Little Big History · Big History · UvA</div>
+  </div>
+</section>
+
+<!-- REFERENCES -->
+<div class="refs">
+  <div class="refs-title">References</div>
+
+  <div style="margin-bottom:1.5rem;font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;color:#333;text-transform:uppercase;">Part 1 — The Inanimate World</div>
+  <div class="ref-item">Alvarez, W. (2017). <em>A most improbable journey: A big history of our planet and ourselves.</em> W. W. Norton & Company. — pp. 24, 25, 26</div>
+  <div class="ref-item">Sylos-Labini, F., Lacquaniti, F., & Ivanenko, Y. P. (2014). Human locomotion under reduced gravity conditions. <em>BioMed Research International,</em> Article 547242. <a href="https://doi.org/10.1155/2014/547242">doi.org/10.1155/2014/547242</a> — pp. 1, 7–8</div>
+  <div class="ref-item">McGrayne, S. B. (2026). <em>Electromagnetism.</em> Encyclopaedia Britannica. <a href="https://www.britannica.com/science/electromagnetism">britannica.com/science/electromagnetism</a> — Introduction</div>
+  <div class="ref-item">Donev, J.M.K.C. (2024). <em>Energy Education.</em> <a href="https://energyeducation.ca">energyeducation.ca</a></div>
+
+  <div style="margin:2rem 0 1rem;font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;color:#333;text-transform:uppercase;">Part 2 — The History of Life</div>
+  <div class="ref-item">Spier, F. (2015). <em>Big history and the future of humanity</em> (2nd ed.). Wiley-Blackwell. — pp. 216, 224, 231, 232, 238</div>
+  <div class="ref-item">Tuthill, J. C., & Azim, E. (2018). Proprioception. <em>Current Biology, 28</em>(5), R194–R203. <a href="https://doi.org/10.1016/j.cub.2018.01.064">doi.org/10.1016/j.cub.2018.01.064</a></div>
+  <div class="ref-item">Hira, R., & Bhatt, D. (2021). New roles for dopamine in motor skill acquisition. <em>Journal of Neurophysiology, 125</em>(6), 2361–2374. <a href="https://doi.org/10.1152/jn.00648.2020">doi.org/10.1152/jn.00648.2020</a> — Introduction</div>
+  <div class="ref-item">Gray, P. (2019). <em>Psychology</em> (8th ed.). Worth Publishers. — p. 1006: Developmental Functions of Play</div>
+
+  <div style="margin:2rem 0 1rem;font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;color:#333;text-transform:uppercase;">Part 3 — Human History: Origins</div>
+  <div class="ref-item">Christian, D. (2018). <em>Origin story: A big history of everything.</em> Little, Brown and Company. — Ch. 8 p. 157; Ch. 9 pp. 168, 169</div>
+  <div class="ref-item">Carolina. (2021). <em>A history of modern pole dance.</em> Blogger On Pole. <a href="https://bloggeronpole.com/2021/07/a-history-of-modern-pole-dance/">bloggeronpole.com</a></div>
+  <div class="ref-item">Wanderlust, A. (2024). <em>Stripping through history.</em> Haus of Pole. <a href="https://www.hausofpole.com/post/stripping-through-history-disrobing-the-origins-of-modern-day-pole-dancing">hausofpole.com</a></div>
+  <div class="ref-item">PBS Newshour. (2015). <em>How performers of color are 'revolutionizing' burlesque.</em> <a href="https://www.pbs.org/newshour/arts/shimmying-beat-history-performers-color-burlesque">pbs.org</a></div>
+
+  <div style="margin:2rem 0 1rem;font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.2em;color:#333;text-transform:uppercase;">Part 4 — Human History: The Anthropocene</div>
+  <div class="ref-item">Christian, D. (2018). <em>Origin story: A big history of everything.</em> Little, Brown and Company. — Ch. 11 p. 212</div>
+  <div class="ref-item">Unearth Women. (2025). <em>How women's rights evolved over the decades.</em> <a href="https://www.unearthwomen.com/how-womens-rights-have-evolved-from-medieval-times-to-present-day/">unearthwomen.com</a></div>
+  <div class="ref-item">Thingb, L. F., & Jensen, A. L. (2022). Performing gender in recreational pole dancing. <em>Sociological Focus, 55</em>(3). <a href="https://www.tandfonline.com/doi/abs/10.1080/00380237.2022.2066589">tandfonline.com</a></div>
+  <div class="ref-item">Carolina. (2021). <em>A history of modern pole dance.</em> Blogger On Pole. <a href="https://bloggeronpole.com/2021/07/a-history-of-modern-pole-dance/">bloggeronpole.com</a></div>
+</div>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('visible');
+        }, 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
