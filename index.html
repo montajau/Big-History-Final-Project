@@ -78,20 +78,11 @@
   .hero {
     min-height: 100vh;
     background: var(--white);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
     position: relative;
     overflow: hidden;
     padding-top: 4rem;
-    display: flex;
-    align-items: stretch;
-  }
-
-  .hero-inner {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 4rem;
   }
 
   .hero-grid {
@@ -839,19 +830,17 @@
   <div class="hero-blob blob-mint"></div>
   <div class="hero-accent"></div>
 
-  <div class="hero-inner">
-    <div class="hero-left">
-      <div class="hero-tag">A Little Big History</div>
-      <h1 class="hero-title">Pole Dancing<br>& The <span>Universe</span></h1>
-      <p class="hero-subtitle">From the Big Bang to a studio in Amsterdam - tracing 13.8 billion years of cosmic, biological, and human history through a single sport.</p>
-    </div>
+  <div class="hero-left">
+    <div class="hero-tag">A Little Big History</div>
+    <h1 class="hero-title">Pole Dancing<br>& The <span>Universe</span></h1>
+    <p class="hero-subtitle">From the Big Bang to a studio in Amsterdam - tracing 13.8 billion years of cosmic, biological, and human history through a single sport.</p>
+  </div>
 
-    <div class="hero-right">
-      <div class="hero-media">
-        <!-- REPLACE with your hero video or photo -->
-        <div style="font-size:2rem;opacity:0.3;">▶</div>
-        <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-align:center;color:#888;">HERO VIDEO / PHOTO<br>Replace with your pole clip</div>
-      </div>
+  <div class="hero-right">
+    <div class="hero-media">
+      <!-- REPLACE with your hero video or photo -->
+      <div style="font-size:2rem;opacity:0.3;">▶</div>
+      <div style="font-family:'DM Mono',monospace;font-size:0.65rem;letter-spacing:0.1em;text-align:center;color:#888;">HERO VIDEO / PHOTO<br>Replace with your pole clip</div>
     </div>
   </div>
 </section>
