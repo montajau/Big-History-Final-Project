@@ -308,6 +308,42 @@
     align-items: start;
   }
 
+  .force-row-bg {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 4rem;
+    align-items: start;
+    background: var(--white);
+    border-radius: 12px;
+    padding: 2.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .force-row-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(74,222,154,0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(74,222,154,0.08) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+  }
+
+  .force-row-bg::after {
+    content: '';
+    position: absolute;
+    width: 350px; height: 350px;
+    border-radius: 50%;
+    background: var(--purple);
+    filter: blur(80px);
+    opacity: 0.06;
+    top: -100px; right: -50px;
+    pointer-events: none;
+  }
+
   .s1-video-pair {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -823,8 +859,7 @@
 
     <div class="s1-grid">
       <div class="body-text reveal" style="grid-column:1/-1;">
-        <p>The six fundamental constants acting on a dancer's body were fixed at the very beginning of the universe, and if any one were even slightly different, the cosmos would be unrecognisable.<sup><a href="#ref2">2</a></sup> Two of these are directly visible in every pole session.</p>
-        <p>Pole dancing is a demonstration of these two forces beautifully landing in their Goldilocks zone.</p>
+        <p>The six fundamental constants acting on a dancer's body were fixed at the very beginning of the universe, and if any one were even slightly different, the cosmos would be unrecognisable.<sup><a href="#ref2">2</a></sup> Two of these are directly visible in every pole session. Pole dancing is a demonstration of these two forces beautifully landing in their Goldilocks zone.</p>
       </div>
 
       <div class="ratio-callout reveal" style="grid-column:1/-1;">
@@ -833,88 +868,92 @@
       </div>
 
       <!-- GRAVITY ROW -->
-      <div class="force-card reveal">
-        <div class="force-header">
-          <div class="force-name">Gravity</div>
-          <div class="force-tag">Fundamental Constant</div>
-        </div>
-        <div class="force-body">
-          <div class="body-text">
-            <p>Gives us weight and makes every hold and inversion a fight. Its specific value sits in a narrow window: strong enough that bodyweight is meaningful resistance to work against, weak enough that a human body can overcome it temporarily.<sup><a href="#ref4">4</a></sup></p>
+      <div class="force-row-bg reveal">
+        <div class="force-card" style="background:rgba(255,255,255,0.7);">
+          <div class="force-header">
+            <div class="force-name">Gravity</div>
+            <div class="force-tag">Fundamental Constant</div>
           </div>
-          <div class="counterfactual-row">
-            <div class="cf-cell">
-              <div class="cf-label stronger">If stronger →</div>
-              <div class="cf-text">Most moves become impossible. Bodyweight pulled down would exceed what human muscles can generate.</div>
+          <div class="force-body">
+            <div class="body-text">
+              <p>Gives us weight and makes every hold and inversion a fight. Its specific value sits in a narrow window: strong enough that bodyweight is meaningful resistance to work against, weak enough that a human body can overcome it temporarily.<sup><a href="#ref4">4</a></sup></p>
             </div>
-            <div class="cf-cell">
-              <div class="cf-label weaker">If weaker →</div>
-              <div class="cf-text">The move loses its meaning. You'd float up with minimal effort. The entire logic of the sport dissolves.</div>
+            <div class="counterfactual-row">
+              <div class="cf-cell">
+                <div class="cf-label stronger">If stronger →</div>
+                <div class="cf-text">Most moves become impossible. Bodyweight pulled down would exceed what human muscles can generate.</div>
+              </div>
+              <div class="cf-cell">
+                <div class="cf-label weaker">If weaker →</div>
+                <div class="cf-text">The move loses its meaning. You'd float up with minimal effort. The entire logic of the sport dissolves.</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div>
-        <div class="s1-video-pair">
-          <div>
-            <div class="video-placeholder reveal" style="aspect-ratio:9/16;margin-bottom:0.4rem;">
-              <div class="icon">▶</div>
-              <div>VIDEO: CLIMB</div>
+        <div>
+          <div class="s1-video-pair">
+            <div>
+              <div class="video-placeholder reveal" style="aspect-ratio:9/16;margin-bottom:0.4rem;">
+                <div class="icon">▶</div>
+                <div>VIDEO: CLIMB</div>
+              </div>
+              <div class="video-caption">climb</div>
             </div>
-            <div class="video-caption">climb</div>
-          </div>
-          <div>
-            <div class="video-placeholder reveal" style="aspect-ratio:9/16;margin-bottom:0.4rem;">
-              <div class="icon">▶</div>
-              <div>VIDEO: AERIAL INVERT</div>
+            <div>
+              <div class="video-placeholder reveal" style="aspect-ratio:9/16;margin-bottom:0.4rem;">
+                <div class="icon">▶</div>
+                <div>VIDEO: AERIAL INVERT</div>
+              </div>
+              <div class="video-caption">aerial invert</div>
             </div>
-            <div class="video-caption">aerial invert</div>
           </div>
+          <p style="font-size:0.75rem;color:var(--grey-text);line-height:1.6;margin-top:0.75rem;font-style:italic;">The climb and the aerial invert both make gravity visible. In the climb, every upward movement is a direct contest with bodyweight - the effort is the point. In the aerial invert, the body temporarily defies the pull entirely, suspended above its own centre of gravity. Neither move would exist as a meaningful feat under different gravitational conditions.</p>
         </div>
-        <p style="font-size:0.75rem;color:var(--grey-text);line-height:1.6;margin-top:0.75rem;font-style:italic;">The climb and the aerial invert both make gravity visible. In the climb, every upward movement is a direct contest with bodyweight - the effort is the point. In the aerial invert, the body temporarily defies the pull entirely, suspended above its own centre of gravity. Neither move would exist as a meaningful feat under different gravitational conditions.</p>
       </div>
 
       <!-- ELECTROMAGNETISM ROW -->
-      <div class="force-card reveal">
-        <div class="force-header">
-          <div class="force-name">Electrical Force</div>
-          <div class="force-tag">Fundamental Constant</div>
-        </div>
-        <div class="force-body">
-          <div class="body-text">
-            <p>The force behind friction - the grip between skin and pole is electromagnetic attraction between atoms at the surface of two materials.<sup><a href="#ref5">5</a></sup> Almost everything tactile in pole dancing is electromagnetism.</p>
+      <div class="force-row-bg reveal">
+        <div class="force-card" style="background:rgba(255,255,255,0.7);">
+          <div class="force-header">
+            <div class="force-name">Electrical Force</div>
+            <div class="force-tag">Fundamental Constant</div>
           </div>
-          <div class="counterfactual-row">
-            <div class="cf-cell">
-              <div class="cf-label stronger">If stronger →</div>
-              <div class="cf-text">Skin grip locks you to the pole. Releasing mid-move becomes dangerous. Most moves stiffen into immobility.</div>
+          <div class="force-body">
+            <div class="body-text">
+              <p>The force behind friction - the grip between skin and pole is electromagnetic attraction between atoms at the surface of two materials.<sup><a href="#ref5">5</a></sup> Almost everything tactile in pole dancing is electromagnetism.</p>
             </div>
-            <div class="cf-cell">
-              <div class="cf-label weaker">If weaker →</div>
-              <div class="cf-text">Grip disappears entirely. Every contact point fails. You'd need mechanical grip for everything.</div>
+            <div class="counterfactual-row">
+              <div class="cf-cell">
+                <div class="cf-label stronger">If stronger →</div>
+                <div class="cf-text">Skin grip locks you to the pole. Releasing mid-move becomes dangerous. Most moves stiffen into immobility.</div>
+              </div>
+              <div class="cf-cell">
+                <div class="cf-label weaker">If weaker →</div>
+                <div class="cf-text">Grip disappears entirely. Every contact point fails. You'd need mechanical grip for everything.</div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      <div>
-        <div class="s1-video-pair">
-          <div>
-            <div style="position:relative;aspect-ratio:9/16;border-radius:8px;overflow:hidden;margin-bottom:0.4rem;">
-              <iframe src="https://www.youtube.com/embed/52IpRKb3-DU?autoplay=1&loop=1&mute=1&playlist=52IpRKb3-DU&controls=0&modestbranding=1&rel=0" frameborder="0" allow="autoplay; fullscreen" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+        <div>
+          <div class="s1-video-pair">
+            <div>
+              <div style="position:relative;aspect-ratio:9/16;border-radius:8px;overflow:hidden;margin-bottom:0.4rem;">
+                <iframe src="https://player.vimeo.com/video/1196010936?badge=0&autopause=0&autoplay=1&loop=1&muted=1&background=1" frameborder="0" allow="autoplay; fullscreen; picture-in-picture" style="position:absolute;top:0;left:0;width:100%;height:100%;"></iframe>
+              </div>
+              <div class="video-caption">jade</div>
             </div>
-            <div class="video-caption">jade</div>
-          </div>
-          <div>
-            <div class="video-placeholder reveal" style="aspect-ratio:9/16;margin-bottom:0.4rem;">
-              <div class="icon">▶</div>
-              <div>VIDEO: GENIE</div>
+            <div>
+              <div class="video-placeholder reveal" style="aspect-ratio:9/16;margin-bottom:0.4rem;">
+                <div class="icon">▶</div>
+                <div>VIDEO: GENIE</div>
+              </div>
+              <div class="video-caption">genie</div>
             </div>
-            <div class="video-caption">genie</div>
           </div>
+          <p style="font-size:0.75rem;color:var(--grey-text);line-height:1.6;margin-top:0.75rem;font-style:italic;">The jade and genie are the clearest examples - moves where skin contact alone is the only thing keeping you up, with no additional grip points. That contact works within a specific range - enough friction to hold bodyweight, not so much that movement becomes impossible.</p>
         </div>
-        <p style="font-size:0.75rem;color:var(--grey-text);line-height:1.6;margin-top:0.75rem;font-style:italic;">The jade and genie are the clearest examples - moves where skin contact alone is the only thing keeping you up, with no additional grip points. That contact works within a specific range - enough friction to hold bodyweight, not so much that movement becomes impossible.</p>
       </div>
     </div>
   </div>
@@ -1189,6 +1228,6 @@
   }, { threshold: 0.3 });
   videos.forEach(v => videoObserver.observe(v));
 </script>
-
+<script src="https://player.vimeo.com/api/player.js"></script>
 </body>
 </html>
